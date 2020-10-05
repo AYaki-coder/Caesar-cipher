@@ -7,7 +7,6 @@ class CaesarCipher {
   }
   
   encode(inputString) {
-    console.log(this.shift);
     const startABCUppecase = 'A'.charCodeAt(0);
     const endABCUppecase = 'Z'.charCodeAt(0);
     const startABC = 'a'.charCodeAt(0);

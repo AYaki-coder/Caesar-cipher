@@ -3,10 +3,12 @@ const fs = require('fs');
 const { program } = require('commander');
 const { pipeline } = require('stream');
 
-const CaesarCipher = require('./CaesarCipherAlgorythm');
+const TransformStream = require('./transfotmStream')
+
+
 const validate = require('./validation');
 
-console.log(process.argv);
+// console.log(process.argv);
 
 program
   .storeOptionsAsProperties(false)
@@ -16,8 +18,20 @@ program
   .option('-o, --output <file>', 'an output file');
 program.parse(process.argv);
 let { shift, action, input, output } = program.opts();
-console.log(input, output, shift, action);
 validate(input, output, shift, action);
-
-let obj = new CaesarCipher(7, false);
-console.log(obj.encode('Aopz pz zljyla. Tlzzhnl hivba "_" zftivs!'));
+const myStream = new TransformStream(shift, action);
+const inputStream = input ?  fs.createReadStream(path.resolve(input)): process.stdin;
+const outputStream = output ?  fs.createWriteStream(path.resolve(output), {flags:'a'}) : process.stdout;
+pipeline(
+  inputStream,
+  myStream,
+  outputStream,
+  (err) => {
+    if (err) {
+      console.error(`${err.code} we've got problem with your file!`);
+      process.exit(-1);
+    } else {
+      console.log('Encoding succeeded.');
+    }
+  }
+);
