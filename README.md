@@ -15,7 +15,7 @@ For encoding/decoding use only the English alphabet, all other characters should
 
 Usage example:
 
-$ node .\caesar-cipher-cli\index.js -a encode -s 7 -i "./input.txt" -o "./output.txt"
+$ node .\caesar-cipher-cli\index.js -a encode -s 7 -i ".\caesar-cipher-cli\input.txt" -o ".\caesar-cipher-cli\output.txt"
 $ node .\caesar-cipher-cli\index.js --action encode --shift 7 --input plain.txt --output encoded.txt
 $ node .\caesar-cipher-cli\index.js --action decode --shift 7 --input decoded.txt --output plain.txt
 
